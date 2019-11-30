@@ -19,7 +19,7 @@ spec:
    #tls:
    #   selfSignedCertificate:
    #     subjectAltNames:
-   #     - ip: 10.4.24.101
+   #     - ip: <ip>
   nodes:
   - nodeCount: 3
     config:

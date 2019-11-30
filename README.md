@@ -9,7 +9,7 @@ The cluster created is also secured cluster.Following securities are provided:
 
 a.)Cluster can be acccesed only inside the resource VNET.
 
-2.)Cluster uses auth details as well certificate for authentication
+b.)Cluster uses auth details as well certificate for authentication
 
 Steps for installing the cluster:
 

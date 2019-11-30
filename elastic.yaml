@@ -1,0 +1,54 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1alpha1
+kind: Elasticsearch
+metadata:
+  name: elasticshardcluster
+spec:
+  version: 7.2.0
+  http:
+   service:
+    metadata:
+      name: elastic-db-loadbalancer
+      labels:
+        role: elastic-db-loadbalancer
+        environment: dev
+      annotations:
+         service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    spec:
+      type: LoadBalancer
+
+   #tls:
+   #   selfSignedCertificate:
+   #     subjectAltNames:
+   #     - ip: 10.4.24.101
+  nodes:
+  - nodeCount: 3
+    config:
+      node.master: true
+      node.data: true
+      node.ingest: true
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+         requests:
+           storage: 64Gi
+        storageClassName: managed-premium
+
+    podTemplate:
+      spec:
+        containers:
+        - name: elasticsearch
+          env:
+          - name: ES_JAVA_OPTS
+            value: -Xms3g -Xmx3g
+          resources:
+            requests:
+              memory: 6Gi
+              cpu: 1
+            limits:
+              memory: 6Gi
+              cpu: 2
+

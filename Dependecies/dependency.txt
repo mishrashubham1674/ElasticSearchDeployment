@@ -1,0 +1,13 @@
+1.)First we ned to apply elastic-operator on kubernetes cluster using the below command:
+
+
+        kubectl apply -f https://download.elastic.co/downloads/eck/0.9.0/all-in-one.yaml
+
+
+2.)We can check the elasticsearch operator using below command:
+      
+        kubectl -n elastic-system logs -f statefulset.apps/elastic-operator
+
+
+
+##Note:You should have contributor access on the kuberenetes cluster for installing the above operator
